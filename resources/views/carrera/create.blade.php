@@ -1,15 +1,17 @@
 @extends('layouts.create')
 
-@section('title', 'Nuevo de Docente')
-
+@section('title', 'Nueva Materia')
+@section('title1', 'Nueva Materia')
 @section('content')
 
-<form class='form-control' method='POST' action="/docentes">
+<form class="form-control" method="POST" action="/materia">
+		@csrf
+
 	<div class="form-group">
-		<label for="">Nombre y apellidos</label>
-		<input type="text" class="form-control">
+		<label for="">Nombre de la materia</label>
+		<input type="text" name="name" class="form-control">
 	</div>
-	<button type="submit" class="btn btn-primary">Guardar Nuevo</button>
+	<button type="submit" class="btn btn-primary">Guardar</button>
 	
 </form>
 @endsection

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Ayudante;
 use Illuminate\Http\Request;
-use App\Materia;
-class MateriaController extends Controller
+
+class AyudanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,7 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        $materias = Materia::All();
-        return view('materia.index', compact('materias'));
+        return view('ayudante.create');
 
     }
 
@@ -25,7 +24,7 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        return view('materia.create');
+        return view('ayudante.create');
 
     }
 
@@ -37,12 +36,10 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        $materia = new Materia();
-        $materia->name = $request->input('name');
-        $materia->save();
-
-        $materias = Materia::All();
-        return view('materia.index', compact('materias'));
+        $ayudante = new Ayudante();
+        $ayudante->name = $request->input('name');
+        $ayudante->save();
+        return view('ayudante.create');
 
     }
 
@@ -54,8 +51,7 @@ class MateriaController extends Controller
      */
     public function show($id)
     {
-        $materia = Materia::find($id);
-        return view('materia.show', compact('materia'));
+        //
     }
 
     /**

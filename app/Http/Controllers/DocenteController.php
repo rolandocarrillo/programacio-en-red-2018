@@ -14,7 +14,8 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        return view('docente.create');
+        $docentes = Docente::All();
+        return view('docente.index', compact('docentes'));
 
     }
 
@@ -36,12 +37,23 @@ class DocenteController extends Controller
      */
     public function store(Request $request)
     {
-        $docente = new Docente();
+        $validatedData = $request->validate([
+            'name'=>'required',
+            'avatar'=>'required|image'
+            ]);
+       $docente = new Docente(); 
+        if($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $name = time().$file->getClientOriginalName();
+            $file->move(public_path().'/images/',$name);
+        }
+        
         $docente->name = $request->input('name');
+        $docente->avatar = $name;
         $docente->save();
 
-        return view('docente.create');
-     }
+        $docentes = Docente::All();
+        return view('docente.index', compact('docentes'));     }
 
     /**
      * Display the specified resource.
@@ -51,7 +63,8 @@ class DocenteController extends Controller
      */
     public function show($id)
     {
-        //
+        $docente = Docente::find($id);
+        return view('docente.show', compact('docente'));
     }
 
     /**
